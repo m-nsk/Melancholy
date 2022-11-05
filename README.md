@@ -1,2 +1,4 @@
 # Melancholy
-Mental Health diary for submission to HackNC 2022-2023
+## A Smart Mental Health Diary
+### Authors: Minjae Kung, Hanqi Xiao, Graham Troy, Achyuta Kannan
+### HackNC 2022-2023
