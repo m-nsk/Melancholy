@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Melancholy: A Smart Diary App</h1>
+    <br>
+    <form action="/write" method="POST">
+        <textarea id="write" name="write" rows="40" cols="100">Enter today's journal entry here!</textarea>
+    </form>
+</div>
+{% endblock %}
