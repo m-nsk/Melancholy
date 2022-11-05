@@ -18,10 +18,10 @@ def fetch(file_name: str) -> dict[str, str]:
         date = parser.parse(first_line)
         return {
             "Date": date.strftime("%Y-%m-%d"),
-            "Text": text}
+            "Text": text
+            }
     except:
         return {
             "Date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-            "Text": text}
-
-print(fetch('sample_3.txt'))
+            "Text": text
+            }
