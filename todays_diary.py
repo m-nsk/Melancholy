@@ -8,6 +8,6 @@ def todays_diary():
     sum_todays_diary = []
     today = datetime.now().strftime("%Y-%m-%d")
     if today not in dates:
-      sum_todays_diary.append(Todays_diary())
+      sum_todays_diary.append(todays_diary())
       dates.append(today)
       print(sum_todays_diary)
