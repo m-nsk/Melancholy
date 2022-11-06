@@ -129,8 +129,8 @@ class MelanJournal():
 
 def main() -> None:
     journal = MelanJournal()
-    journal.turn_into_data_frame([fetch("sample_3.txt")])
-    journal.turn_into_data_frame([fetch("sample_2.txt")])
+    journal.turn_into_data_frame(fetch("sample_3.txt"))
+    journal.turn_into_data_frame(fetch("sample_2.txt"))
     journal.wordcloud()
     pass
 

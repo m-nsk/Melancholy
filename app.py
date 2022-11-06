@@ -21,7 +21,7 @@ def write():
         written = request.form["write"]
         try:
             save_text.save_text(written)
-            journal.turn_into_data_frame({datetime.datetime.now(), written})
+            journal.turn_into_data_frame({"Date": datetime.datetime.now(), "Text": written})
             return redirect('/')
         except:
             return "There was an error."
