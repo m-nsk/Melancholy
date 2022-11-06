@@ -9,8 +9,8 @@
     <h1>Melancholy: A Smart Diary</h1>
     <br>
     <h4>Upload a .txt file of a past entry.</h4>
-    <form action="/upload" method="POST">
-        <input type="file" id="upload" name="filename" accept=".txt">
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="filename" accept=".txt">
         <input type="submit" value="Upload">
     </form>
 </div>
