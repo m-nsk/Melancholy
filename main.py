@@ -18,7 +18,7 @@ from wordcloud import WordCloud
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 nltk.download('averaged_perceptron_tagger')
 nltk.download('stopwords')
-
+nltk.download('punkt')
 
 def filter_insignificant(chunk, tag_suffixes=['DT', 'CC']):
   good = []
