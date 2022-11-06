@@ -11,7 +11,6 @@ def fetch(file_name: str) -> dict[str, str]:
     with open(file_dir, 'r', encoding="utf-8") as file:
         first_line = file.readline()
 
-    print(first_line)
 
     # IF first line is a date return date and text, if not, error, pass.
     try:
@@ -23,5 +22,3 @@ def fetch(file_name: str) -> dict[str, str]:
         return {
             "Date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
             "Text": text}
-
-print(fetch('sample_3.txt'))
