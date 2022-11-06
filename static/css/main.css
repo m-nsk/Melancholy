@@ -1,0 +1,40 @@
+body, html{
+    margin: 0;
+    font-family: 'Trebuchet MS', sans-serif;
+    background: #BEAECF;
+    background: -moz-linear-gradient(-45deg, #BEAECF 0%, #99C0C8 100%);
+    background: -webkit-linear-gradient(-45deg, #BEAECF 0%, #99C0C8 100%);
+    background: linear-gradient(135deg, #BEAECF 0%, #99C0C8 100%);
+    text-align: center;
+}
+
+.content {
+    margin: 0 auto;
+    width: 700px;
+}
+
+table, td, th {
+    border: 1px solid #aaa;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    height: 30px;
+}
+
+td {
+    text-align: center;
+    padding: 5px;
+}
+
+.form {
+    margin-top: 20px;
+}
+
+#content {
+    width: 70%;
+}
