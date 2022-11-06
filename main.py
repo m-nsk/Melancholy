@@ -17,8 +17,8 @@ import nltk
 from wordcloud import WordCloud
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 nltk.download('averaged_perceptron_tagger')
-nltk.download('stopwords')
-nltk.download('punkt')
+from transformers import pipeline
+
 
 def filter_insignificant(chunk, tag_suffixes=['DT', 'CC']):
   good = []
@@ -57,14 +57,25 @@ def word_cloud_clean(entry: str) -> str:
     entry = [word for word, pos in filter_insignificant(pos_tag(entry))]
     # print(entry)
     # entry = [stemmer.stem(w) for w in entry]
-    print(entry)
     return entry
 
 
 def sentiment_polarity(entry: str) -> float:
-    """Polarity determine."""
-    
+    analyzer = SentimentIntensityAnalyzer()
+    sentiment = analyzer.polarity_scores(entry)
+    sentiment = pd.json_normalize(sentiment)
+    display(sentiment)
+    print(type(sentiment))
+    return sentiment
 
+
+def emotion_polarity(entry: str) -> float:
+    """Polarity determine."""
+    classifier = pipeline("text-classification", model = "bhadresh-savani/distilbert-base-uncased-emotion")
+    # classifier = pipeline("sentiment-analysis")
+    predict = classifier(entry)
+    print(predict)
+    return predict
 
 
 class MelanJournal():
@@ -78,7 +89,7 @@ class MelanJournal():
         if self.new_user == True:
             self.settings()
             self.new_user = False
-            self.data = pd.DataFrame(columns = ["Date", "Text"])
+            self.data = pd.DataFrame(columns = ["Date", "Text", "Word Cloud Text", "Sentiment", "Word Cloud Frequency", "Word Count"])
 
 
     def settings(self) -> None:
@@ -120,18 +131,43 @@ class MelanJournal():
             plt.figure(figsize=(20,5), )
             plt.imshow(cloud, interpolation="bilinear")
             plt.axis("off")
-            
+            plt.show()
 
 
-    def sentiment_by_time(self) -> pd.DataFrame:
+    def plotmy_stuffies(self) -> None:
+        """Deprecated"""
+        sentiments = self.data["Sentiment"]
+        print(type(sentiments))
+
+
+    def sentiment_by_time(self) -> None:
         """Make a new column where a new column is added to the dataframe."""
+        sentiments = self.data["Sentiment"]
+        datings = self.data["Date"]
+        print(type(sentiments))
+        heights = []
+        dates = []
+        for i, frame in sentiments.items():
+            print(type(frame["neg"][0]))
+            heights.append(frame["neg"][0])
+        for i, frame in datings.items():
+            dates.append(frame)
+        print(len(heights), dates)
+        plt.bar(dates, heights)
+        plt.xticks(rotation=75)
+        plt.show()
+
+
 
 
 def main() -> None:
     journal = MelanJournal()
-    journal.turn_into_data_frame(fetch("sample_3.txt"))
-    journal.turn_into_data_frame(fetch("sample_2.txt"))
-    journal.wordcloud()
+    # journal.turn_into_data_frame(fetch("sample_3.txt"))
+    # journal.turn_into_data_frame(fetch("sample_2.txt"))
+    for i in range(1, 11):
+        journal.turn_into_data_frame(fetch(f"sample_{i}.txt"))
+    # journal.wordcloud()
+    journal.sentiment_by_time()
     pass
 
 main()
