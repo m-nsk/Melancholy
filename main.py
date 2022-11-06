@@ -88,14 +88,28 @@ class MelanJournal():
         self.reminder_time = datetime.time(*map(int, reminder_time.split(':')))
 
 
-    def turn_into_data_frame(self, data = dict[datetime.datetime, str]) -> None:
+    def turn_into_data_frame(self, data: dict[str, str]) -> None:
         """Convert into a dataframe."""
-        self.data = pd.concat([pd.DataFrame(data), self.data], sort = False)
-        # generate the stemmed version of all entries.
-        self.data["Word Cloud Text"] = self.data["Text"].apply(word_cloud_clean)
-        self.data["Word Cloud Frequency"] = self.data["Word Cloud Text"].apply(word_frequencies)
-        self.data["Word Count"] = self.data["Word Cloud Text"].apply(lambda x: len(x))
-        display(self.data.head(1))
+        print(type(data))
+        word_cloud_text = word_cloud_clean(data["Text"])
+        sentiment = sentiment_polarity(data["Text"])
+        word_cloud_frequency = word_frequencies(word_cloud_text)
+        word_count = len(word_cloud_text)
+        data["Word Cloud Text"] = word_cloud_text
+        data["Sentiment"] = sentiment
+        data["Word Cloud Frequency"] = word_cloud_frequency
+        data["Word Count"] = word_count
+
+        self.data = pd.concat([pd.DataFrame([data]), self.data], sort = False)
+        # # Calculate all variables.
+        # self.data["Word Cloud Text"] = self.data["Text"].apply(word_cloud_clean)
+        # # self.data["Emotions"] = self.data["Text"].apply(emotion_polarity)
+        # self.data["Sentiment"] = self.data["Text"].apply(sentiment_polarity)
+        # print(type(self.data["Sentiment"][0]))
+        # self.data["Word Cloud Frequency"] = self.data["Word Cloud Text"].apply(word_frequencies)
+        # self.data["Word Count"] = self.data["Word Cloud Text"].apply(lambda x: len(x))
+
+        display(self.data)
 
     
     def wordcloud(self) -> None:
