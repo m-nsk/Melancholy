@@ -1,10 +1,15 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash, Markup
 from main import MelanJournal
 import datetime
 import save_text
 from werkzeug.utils import secure_filename
 from get_txt import fetch
+import jinja2
+
+
+template_dir = os.path.join(os.path.dirname(__file__), '/')
+jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
 
 
 app = Flask(__name__)
@@ -32,16 +37,24 @@ def write():
 @app.route("/upload", methods=["POST", "GET"])
 def upload():
     if request.method == "POST":
-        # try:
-        upload = request.files["filename"]
-        upload.save(os.path.join("./Diary_uploads/", secure_filename(upload.filename)))
-        journal.turn_into_data_frame(fetch(upload.filename))
-        return redirect('/')
-        # except:
-        return "There was an error."
+        try:
+            upload = request.files["filename"]
+            upload.save(os.path.join("./Diary_uploads/", secure_filename(upload.filename)))
+            journal.turn_into_data_frame(fetch(upload.filename))
+            return redirect('/')
+        except:
+            return "There was an error."
     else:
         return render_template("upload.html")
 
+
+@app.route("/visualize", methods=["POST", "GET"])
+def visualize():
+    all_visualizations = list()
+    for filename in os.listdir("visualizations"):
+        all_visualizations.append("css/visualizations/" + filename)
+    
+    return render_template("visualize.html", all_visualizations=all_visualizations)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -7,11 +7,11 @@ body, html{
     background: linear-gradient(135deg, #BEAECF 0%, #99C0C8 100%);
     text-align: center;
 }
-
+/*
 .content {
     margin: 0 auto;
     width: 700px;
-}
+}*/
 
 table, td, th {
     border: 1px solid #aaa;
@@ -75,4 +75,20 @@ input[type=submit] {
 input[type=submit]:hover {
     color: #ffffff;
     background-color: #988ead;
+}
+
+.css-input {
+    padding: 5px;
+    font-size: 16px;
+    border-width: 1px;
+    border-color: #CCCCCC;
+    background-color: #b2b4cd;
+    color: #000000;
+    border-style: solid;
+    border-radius: 0px;
+    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+    text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+}
+.css-input:focus {
+    outline:none;
 }

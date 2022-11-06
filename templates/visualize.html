@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Visualize</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Melancholy: A Smart Diary</h1>
+    <h3>Here are your past entries visualized.</h3>
+    <br>
+    <form action="/">
+        <input type="submit" value="Home">
+    </form>
+    <br>
+    {% for svg in all_visualizations %}
+    <img src="{{ url_for('static', filename=svg) }}" align="middle"/>
+    <br>
+    {% endfor %}
+    <br>
+    <form action="/">
+        <input type="submit" value="Home">
+    </form>
+    <br>
+    <br>
+</div>
+{% endblock %}
