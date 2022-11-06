@@ -3,15 +3,19 @@
 import datetime
 import pandas as pd
 import numpy as np
+from IPython.display import display
 from textblob import TextBlob
 from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 from nltk import pos_tag
+from matplotlib import pyplot as plt
 from textblob import Word
 from get_txt import fetch
 import string
 import nltk
+from wordcloud import WordCloud
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 nltk.download('averaged_perceptron_tagger')
 
 
@@ -49,12 +53,16 @@ def word_cloud_clean(entry: str) -> str:
     eng_stops: list[str] = stopwords.words("english")
     entry = [i for i in word_tokenize(entry) if i not in eng_stops]
     entry = list(filter(lambda word: word not in string.punctuation+"’“”", entry))
-    print(entry)
     entry = [word for word, pos in filter_insignificant(pos_tag(entry))]
     # print(entry)
     # entry = [stemmer.stem(w) for w in entry]
     print(entry)
     return entry
+
+
+def sentiment_polarity(entry: str) -> float:
+    """Polarity determine."""
+    
 
 
 
@@ -85,12 +93,19 @@ class MelanJournal():
         # generate the stemmed version of all entries.
         self.data["Word Cloud Text"] = self.data["Text"].apply(word_cloud_clean)
         self.data["Word Cloud Frequency"] = self.data["Word Cloud Text"].apply(word_frequencies)
-        print(self.data)
+        self.data["Word Count"] = self.data["Word Cloud Text"].apply(lambda x: len(x))
+        display(self.data.head(1))
 
     
     def wordcloud(self) -> None:
         for i, row in self.data.iterrows():
             frequencies = row["Word Cloud Frequency"]
+            cloud = WordCloud(background_color="White")
+            cloud.generate_from_frequencies(frequencies)
+            plt.figure(figsize=(20,5), )
+            plt.imshow(cloud, interpolation="bilinear")
+            plt.axis("off")
+            plt.show()
 
 
     def sentiment_by_time(self) -> pd.DataFrame:
@@ -100,6 +115,8 @@ class MelanJournal():
 def main() -> None:
     journal = MelanJournal()
     journal.turn_into_data_frame([fetch("sample_3.txt")])
+    journal.turn_into_data_frame([fetch("sample_2.txt")])
+    journal.wordcloud()
     pass
 
 main()
