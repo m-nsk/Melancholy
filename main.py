@@ -9,8 +9,7 @@ from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 from nltk import pos_tag
-# from matplotlib import pyplot as plt
-import matplotlib.pyplot as plt, mpld3
+from matplotlib import pyplot as plt
 from textblob import Word
 from get_txt import fetch
 import string
@@ -19,7 +18,7 @@ from wordcloud import WordCloud
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 nltk.download('averaged_perceptron_tagger')
 from transformers import pipeline
-mpld3.save_html()
+
 
 def filter_insignificant(chunk, tag_suffixes=['DT', 'CC']):
   good = []
@@ -143,20 +142,30 @@ class MelanJournal():
 
     def sentiment_by_time(self) -> None:
         """Make a new column where a new column is added to the dataframe."""
+        fig, axes = plt.subplots(1, 4, figsize=(15, 5))
+        fig.suptitle("Diary Sentiment Over Time", size= "x-large")
         sentiments = self.data["Sentiment"]
         datings = self.data["Date"]
         print(type(sentiments))
-        heights = []
-        dates = []
-        for i, frame in sentiments.items():
-            print(type(frame["neg"][0]))
-            heights.append(frame["neg"][0])
-        for i, frame in datings.items():
-            dates.append(frame)
-        print(len(heights), dates)
-        plt.bar(dates, heights)
-        plt.xticks(rotation=75)
+        titles: list[str] = ["Negativity", "Neutrality", "Positivity", "Compound"]
+        colors: list[str] = ["red", "grey", "green", "orange"]
+        for x, label in enumerate(["neg", 'neu', "pos", "compound"]):
+            heights = []
+            dates = []
+            for i, frame in sentiments.items():
+                print(type(frame[label][0]))
+                heights.append(frame[label][0])
+            for i, frame in datings.items():
+                dates.append(frame)
+            print(len(heights), dates)
+            axes[x].bar(dates, heights, color= colors[x])
+            for label in axes[x].get_xticklabels():
+                label.set_rotation(75)
+                label.set_ha('right')
+            axes[x].set_title(titles[x])
+        # plt.xticks(rotation=75)
         plt.show()
+        fig.savefig("Bar_Graph_Over_Time.svg", transparent = True)
 
 
 
