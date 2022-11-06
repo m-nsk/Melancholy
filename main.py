@@ -9,7 +9,8 @@ from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 from nltk import pos_tag
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt, mpld3
 from textblob import Word
 from get_txt import fetch
 import string
@@ -18,7 +19,7 @@ from wordcloud import WordCloud
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 nltk.download('averaged_perceptron_tagger')
 from transformers import pipeline
-
+mpld3.save_html()
 
 def filter_insignificant(chunk, tag_suffixes=['DT', 'CC']):
   good = []
