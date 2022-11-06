@@ -131,7 +131,8 @@ class MelanJournal():
             plt.figure(figsize=(20,5), )
             plt.imshow(cloud, interpolation="bilinear")
             plt.axis("off")
-            plt.show()
+            # plt.show()
+            plt.savefig(f"visualizations/{row['Date']}_Wordcloud.svg", transparent = True)
 
 
     def plotmy_stuffies(self) -> None:
@@ -165,7 +166,7 @@ class MelanJournal():
             axes[x].set_title(titles[x])
         # plt.xticks(rotation=75)
         plt.show()
-        fig.savefig("Bar_Graph_Over_Time.svg", transparent = True)
+        fig.savefig("visualizations/Bar_Graph_Over_Time.svg", transparent = True)
 
 
 
@@ -176,7 +177,7 @@ def main() -> None:
     # journal.turn_into_data_frame(fetch("sample_2.txt"))
     for i in range(1, 11):
         journal.turn_into_data_frame(fetch(f"sample_{i}.txt"))
-    # journal.wordcloud()
+    journal.wordcloud()
     journal.sentiment_by_time()
     pass
 
