@@ -129,7 +129,7 @@ class MelanJournal():
             cloud = WordCloud(background_color="White")
             cloud.generate_from_frequencies(frequencies)
             plt.figure(figsize=(20,5), )
-            plt.imshow(cloud, interpolation="bilinear")
+            # plt.imshow(cloud, interpolation="bilinear")
             plt.axis("off")
             # plt.show()
             plt.savefig(f"visualizations/{row['Date']}_Wordcloud.svg", transparent = True)
@@ -165,7 +165,7 @@ class MelanJournal():
                 label.set_ha('right')
             axes[x].set_title(titles[x])
         # plt.xticks(rotation=75)
-        plt.show()
+        # plt.show()
         fig.savefig("visualizations/Bar_Graph_Over_Time.svg", transparent = True)
 
 
