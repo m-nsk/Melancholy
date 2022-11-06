@@ -32,13 +32,13 @@ def write():
 @app.route("/upload", methods=["POST", "GET"])
 def upload():
     if request.method == "POST":
-        try:
-            upload = request.files["filename"]
-            upload.save(os.path.join("./Diary_uploads/", secure_filename(upload.filename)))
-            journal.turn_into_data_frame(fetch(upload.filename))
-            return redirect('/')
-        except:
-            return "There was an error."
+        # try:
+        upload = request.files["filename"]
+        upload.save(os.path.join("./Diary_uploads/", secure_filename(upload.filename)))
+        journal.turn_into_data_frame(fetch(upload.filename))
+        return redirect('/')
+        # except:
+        return "There was an error."
     else:
         return render_template("upload.html")
 
