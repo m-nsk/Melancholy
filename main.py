@@ -106,7 +106,7 @@ class MelanJournal():
             plt.figure(figsize=(20,5), )
             plt.imshow(cloud, interpolation="bilinear")
             plt.axis("off")
-            plt.show()
+            
 
 
     def sentiment_by_time(self) -> pd.DataFrame:
