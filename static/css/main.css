@@ -38,3 +38,41 @@ td {
 #content {
     width: 70%;
 }
+
+.btn {
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    color: #ffffff;
+    font-size: 20px;
+    background: #bab0ce;
+    padding: 10px 20px 10px 20px;
+    border: solid #988ead 3px;
+    text-decoration: none;
+}
+  
+.btn:hover {
+    background: #988ead;
+    background-image: -webkit-linear-gradient(top, #988ead, #988ead);
+    background-image: -moz-linear-gradient(top, #988ead, #988ead);
+    background-image: -ms-linear-gradient(top, #988ead, #988ead);
+    background-image: -o-linear-gradient(top, #988ead, #988ead);
+    background-image: linear-gradient(to bottom, #988ead, #988ead);
+    text-decoration: none;
+}
+
+input[type=submit] {
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    color: #ffffff;
+    font-size: 20px;
+    background: #bab0ce;
+    padding: 10px 20px 10px 20px;
+    border: solid #988ead 3px;
+    text-decoration: none;
+}
+input[type=submit]:hover {
+    color: #ffffff;
+    background-color: #988ead;
+}

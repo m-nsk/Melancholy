@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Upload a past entry</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Melancholy: A Smart Diary</h1>
+    <br>
+    <h4>Upload a .txt file of a past entry.</h4>
+    <form action="/upload" method="POST">
+        <input type="file" id="upload" name="filename" accept=".txt">
+        <input type="submit" value="Upload">
+    </form>
+</div>
+{% endblock %}

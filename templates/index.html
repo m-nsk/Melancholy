@@ -9,7 +9,13 @@
     <h1>Melancholy: A Smart Diary</h1>
     <h2>Welcome to Melancholy. Please do something.</h2>
     <br>
-    <a href="/write">Write</a>
+    <form action="/write">
+        <input type="submit" value="Write a journal entry">
+    </form>
+    <br>
+    <form action="/upload">
+        <input type="submit" value="Upload a past journal entry">
+    </form>
     <br>
 </div>
 {% endblock %}
