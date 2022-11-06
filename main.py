@@ -52,7 +52,7 @@ def word_cloud_clean(entry: str) -> str:
     """Clean every paragraph, stems all the words, puts into one list."""
     stemmer = PorterStemmer()
     eng_stops: list[str] = stopwords.words("english")
-    entry = [i for i in word_tokenize(entry) if i not in eng_stops]
+    entry = [i for i in word_tokenize(entry) if i not in eng_stops+["I", "n't", "since", "friends", "'s"]]
     entry = list(filter(lambda word: word not in string.punctuation+"’“”", entry))
     entry = [word for word, pos in filter_insignificant(pos_tag(entry))]
     # print(entry)
@@ -177,8 +177,8 @@ def main() -> None:
     # journal.turn_into_data_frame(fetch("sample_2.txt"))
     for i in range(1, 11):
         journal.turn_into_data_frame(fetch(f"sample_{i}.txt"))
-    journal.wordcloud()
-    journal.sentiment_by_time()
+    # journal.wordcloud()
+    # journal.sentiment_by_time()
     pass
 
 main()
