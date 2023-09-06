@@ -39,16 +39,9 @@ MelanJournal is a Python-based project that aims to provide a comprehensive anal
     ```bash
     pip install -r requirements.txt
     ```
-
-#### How to Use
-
-1. Run the `main()` function to initialize the MelanJournal object.
-2. Use the `turn_into_data_frame()` method to add a new diary entry.
-3. Use the `wordcloud()` method to generate a word cloud.
-4. Use the `sentiment_by_time()` method to plot sentiment over time.
-
+    
 #### Code Structure
-
+(Excludes flask web app)
 - `MelanJournal`: The main class that handles the diary analytics.
   - `__init__`: Initializes the object and sets default settings.
   - `settings`: Allows you to change settings like reminder time.
